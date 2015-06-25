@@ -130,10 +130,9 @@ def divide_and_conquer_alignment_1(x, y, g, a, diff, offset, index):
         else:
             _f, _ = linear_sequence_alignment(x, y[:int(n/2)], g, a)
             _g, _ = linear_sequence_alignment(x[::-1], y[int(n/2):][::-1], g, a)
-            _, c = linear_sequence_alignment(x, y, g, a)
+            _g = _g[::-1]
             r = [int((_f[i] + _g[i])*10) for i in range(len(_f))]
-#             q = (find_last(r, min(r))) if int(c*10) not in r else find_last(r, int(c*10))
-            q = (r.index(min(r))) if int(c*10) not in r else r.index(int(c*10))
+            q = r.index(min(r))
             divide_and_conquer_alignment_1(x[:q], y[:n / 2], g, a, diff, offset / 2 , index - offset / 2)
             divide_and_conquer_alignment_1(x[q:], y[n / 2:], g, a, diff, offset / 2, index + offset / 2)
 
